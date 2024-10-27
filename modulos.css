@@ -144,7 +144,7 @@ label[for=nav-toggle] {
     top: -70px;
     width: calc(100% - 16px);
     height: 54px;
-    background: var(--navbar-color);
+    background: var(--background);
     background-attachment: fixed;
     border-radius: 16px 0 0 16px;
     transition: top 0.2s;
@@ -159,12 +159,12 @@ label[for=nav-toggle] {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    box-shadow: 16px 16px var(--navbar-color);
+    box-shadow: 16px 16px var(--background);
 }
 
 #nav-content-highlight:after {
     top: 100%;
-    box-shadow: 16px -16px var(--navbar-color);
+    box-shadow: 16px -16px var(--background);
 }
 
 .nav-button {
@@ -343,202 +343,87 @@ label[for=nav-footer-toggle] {
 
 #nav-footer-content::-webkit-scrollbar-thumb {
     border-radius: 99px;
-    background-color: var(--navbar-color);
+    background-color: var(--background);
 }
 
-.trilha-container {
+.text-1 {
+    position: fixed;
+    color: #fff;
+    font-size: 40px;
+    margin-left: 650px;
+    margin-top: -30px;
+}
+
+.text-2 {
+    position: fixed;
+    color: #D0CCCC;
+    font-size: 15px;
+    margin-left: 470px;
+    margin-top: 90px;
+}
+
+.rectangle-container {
+    position: fixed;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%;
+    gap: 50px;
+    margin-top: 180px;
+    margin-left: 250px;
+    flex-wrap: wrap;
 }
 
-.trilha {
+.rectangle {
+    width: 300px;
+    height: 150px;
+    background-color: var(--navbar-color);
+    color: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.nivel {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 50%;
-    color: #fff;
-    background-color: #ff6b6b;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 1.2em;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.nivel:hover {
-    background-color: #ff4d4d;
-    box-shadow: 0 0 35px red;
+.rectangle:not(.rectangle-light-red):not(.rectangle-php) {
+    background-color: #DFC515;
 }
 
-
-.nivel.completed {
-    background-color: var(--navbar-color);
-    width: 100px;
-    height: 100px;
-    margin-top: 10px;
-    margin-right: 600px;
+.rectangle-light-red {
+    background-color: #007bff;
 }
 
-.nivel.active {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: 15px;
-    margin-right: 450px;
-    height: 100px
+.rectangle-php {
+    background-color: #4F5B93;
 }
 
-.nivel.active2 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: 40px;
-    margin-left: -420px;
-    height: 100px
+.rectangle:not(.rectangle-light-red):not(.rectangle-php):hover {
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.6)
 }
 
-.nivel.active3 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: 50px;
-    margin-left: -220px;
-    height: 100px
+.rectangle-light-red:hover {
+    box-shadow: 0 0 35px rgba(0, 123, 255, 0.6);
 }
 
-
-.nivel.active4 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: 20px;
-    margin-left: 80px;
-    height: 100px
+.rectangle-php:hover {
+    box-shadow: 0 0 35px rgba(111, 112, 179, 0.6);
 }
 
-.nivel.active5 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: -20px;
-    margin-left: 220px;
-    height: 100px
+.rectangle .subtitle {
+    font-size: 0.9em;
+    color: #ffffffb3;
 }
 
-.nivel.active6 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: -180px;
-    margin-left: 500px;
-    height: 100px
+.rectangle .conteudo {
+    margin-top: 67px;
+    color: #ffffffb3;
 }
 
-.nivel.active7 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: -150px;
-    margin-left: 880px;
-    height: 100px
-}
-
-.nivel.active8 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: -150px;
-    margin-left: 950px;
-    height: 100px
-}
-
-.nivel.active9 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: -80px;
-    margin-right: -800px;
-    height: 100px
-}
-
-.nivel.active10 {
-    background-color: var(--navbar-color);
-    width: 100px;
-    margin-top: -5px;
-    margin-left: 1225px;
-    height: 100px
-}
-
-.nivel:hover {
-    background-color: #d92626;
-}
-
-.trilha .nivel i {
-    font-size: 2.5rem;
-}
-
-.nivel.active5 i {
-    font-size: 2.5rem;
-}
-
-.nivel.active2 i {
-    font-size: 2.5rem;
-}
-
-.heart-icon {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 2.5rem;
-    color: var(--navbar-color);
-    margin-right: 150px;
-}
-
-.progress-container {
+.rectangle .arrow {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 15px;
-    z-index: 1000;
-}
-
-.progress-bar {
-    width: 200px;
-    height: 25px;
-    background-color: #e0e0e0;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.progress {
-    height: 100%;
-    width: 0%;
-    background-color: var(--navbar-color);
-    border-radius: 15px;
-    transition: width 0.5s ease-in-out;
-}
-
-.lives {
-    display: flex;
-}
-
-.lives i {
-    font-size: 24px;
-    color: #ff4c4c;
-    margin-left: 5px;
-}
-
-.lives i.lost {
-    color: #cccccc;
-}
-
-.modulo-back h2 {
-    font-size: 3.5rem;
-    color: var(--navbar-color);
-    margin-left: 300px;
-    margin-top: 40px;
-    opacity: 50%;
+    margin-left: 180px;
+    margin-top: 120px;
 }
