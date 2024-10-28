@@ -7,7 +7,7 @@
     --navbar-dark-primary: #172125;
     --navbar-light-primary: #f5f6fa;
     --navbar-light-secondary: #8392a5;
-    --navbar-color: #D31B23;
+    --navbar-color: #dfc515;
 }
 
 html,
@@ -375,13 +375,12 @@ label[for=nav-footer-toggle] {
 }
 
 .nivel:hover {
-    background-color: #ff4d4d;
-    box-shadow: 0 0 35px red;
+    box-shadow: 0 0 35px var(--navbar-color);
 }
 
 
 .nivel.completed {
-    background-color: var(--navbar-color);
+    background-color: #86760d;
     width: 100px;
     height: 100px;
     margin-top: 10px;
@@ -397,7 +396,7 @@ label[for=nav-footer-toggle] {
 }
 
 .nivel.active2 {
-    background-color: var(--navbar-color);
+    background-color: #86760d;
     width: 100px;
     margin-top: 40px;
     margin-left: -420px;
@@ -414,7 +413,7 @@ label[for=nav-footer-toggle] {
 
 
 .nivel.active4 {
-    background-color: var(--navbar-color);
+    background-color: #86760d;
     width: 100px;
     margin-top: 20px;
     margin-left: 80px;
@@ -438,7 +437,7 @@ label[for=nav-footer-toggle] {
 }
 
 .nivel.active7 {
-    background-color: var(--navbar-color);
+    background-color: #86760d;
     width: 100px;
     margin-top: -150px;
     margin-left: 880px;
@@ -467,10 +466,6 @@ label[for=nav-footer-toggle] {
     margin-top: -5px;
     margin-left: 1225px;
     height: 100px
-}
-
-.nivel:hover {
-    background-color: #d92626;
 }
 
 .trilha .nivel i {
@@ -540,5 +535,23 @@ label[for=nav-footer-toggle] {
     color: var(--navbar-color);
     margin-left: 300px;
     margin-top: 40px;
+    opacity: 50%;
+}
+
+.text-back {
+    font-size: 4.5rem;
+    color: var(--navbar-color);
+    margin-left: 1100px;
+    margin-top: -475px;
+    font-weight: 900;
+    opacity: 50%;
+}
+
+.linguagem-back {
+    font-size: 4.5rem;
+    color: #fff;
+    margin-left: 1015px;
+    font-weight: 900;
+    margin-top: -50px;
     opacity: 50%;
 }
