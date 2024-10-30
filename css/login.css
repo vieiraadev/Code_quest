@@ -139,23 +139,6 @@ section span:hover {
   color: #fff;
 }
 
-.signin .content .form .links {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.signin .content .form .links a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.signin .content .form .links a:nth-child(2) {
-  color: #fff;
-  font-weight: 600;
-}
-
 .signin .content .form .inputBox input[type="submit"] {
   padding: 10px;
   background: #c0091c;
@@ -169,6 +152,48 @@ section span:hover {
 input[type="submit"]:active {
   opacity: 0.6;
 }
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.button-group input[type="submit"],
+.button-group input[type="button"] {
+  width: 300px;
+  height: 50px;
+  font-weight: 600;
+  font-size: 1.35em;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: box-shadow 0.3s;
+}
+
+.button-group input[type="submit"] {
+  background: #c0091c;
+  color: #fff;
+  border: none;
+}
+
+.button-group input[type="submit"]:hover,
+.button-group input[type="button"]:hover {
+  box-shadow: 0 0 35px #c0091c;
+}
+
+.button-group input[type="button"] {
+  background: transparent;
+  border: 2px solid #c0091c;
+  color: #fff;
+  transition: background 0.3s, color 0.3s;
+}
+
+.button-group input[type="button"]:hover {
+  background: #c0091c;
+  color: #fff;
+}
+
 
 
 @media (max-width: 900px) {

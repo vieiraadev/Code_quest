@@ -116,7 +116,7 @@ section span:hover {
     border: none;
     outline: none;
     padding: 25px 10px 7.5px;
-    border-radius: 41px;
+    border-radius: 8px;
     color: #fff;
     font-weight: 500;
     font-size: 1em;
@@ -178,6 +178,11 @@ section span:hover {
     font-size: 1.35em;
     letter-spacing: 0.05em;
     cursor: pointer;
+    transition: box-shadow 0.3s;
+}
+
+.signin .content .form .inputBox input[type="submit"]:hover {
+    box-shadow: 0 0 10px #c0091c, 0 0 20px #c0091c;
 }
 
 input[type="submit"]:active {
