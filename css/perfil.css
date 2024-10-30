@@ -1,5 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 
 :root {
     --background: #0f1517;
@@ -8,7 +42,7 @@
     --navbar-dark-primary: #172125;
     --navbar-light-primary: #f5f6fa;
     --navbar-light-secondary: #8392a5;
-    --navbar-color: #D31B23;
+    --navbar-color: #dfc515;
 }
 
 html,
@@ -344,93 +378,115 @@ label[for=nav-footer-toggle] {
 
 #nav-footer-content::-webkit-scrollbar-thumb {
     border-radius: 99px;
-    background-color: var(--background);
+    background-color: var(--navbar-color);
 }
 
-.text-1 {
-    position: fixed;
-    color: #fff;
-    font-size: 40px;
-    margin-left: 650px;
-    margin-top: -30px;
-    font-family: 'Poppins', sans-serif;
-}
 
-.text-2 {
-    position: fixed;
-    color: #D0CCCC;
-    font-size: 15px;
-    margin-left: 470px;
-    margin-top: 90px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.rectangle-container {
-    position: fixed;
+.profile-content {
+    margin-left: 20vw;
+    width: 78vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
-    gap: 50px;
-    margin-top: 180px;
-    margin-left: 250px;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
-.rectangle {
+.main-infos {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    height: 90vh;
+    width: 120vw;
+    background-color: var(--navbar-dark-primary);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.profile-photo {
+    width: 18vw;
+    height: 32vh;
+    margin-top: 8vh;
+}
+
+.profile-photo img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.main-name {
+    width: 28vw;
+    height: auto;
+    text-align: center;
+    color: var(--navbar-light-primary);
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 3vh;
+
+}
+
+.occupation-info {
+    width: 18vw;
+    height: auto;
+    font-size: 1.4rem;
+    color: var(--navbar-light-secondary);
+    text-align: center;
+    margin-top: 1vh;
+
+}
+
+.social-media-info {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-box {
     width: 300px;
-    height: 150px;
-    background-color: var(--navbar-color);
+    height: 60px;
+    background-color: #2B393E;
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     font-size: 1.2em;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
     padding: 10px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.rectangle:not(.rectangle-light-red):not(.rectangle-php) {
-    background-color: #DFC515;
+.social-box:hover {
+    transform: scale(1.1)
 }
 
-.rectangle-light-red {
-    background-color: #007bff;
+.social-box a {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    gap: 8px;
+    display: flex;
+    margin-top: 7px;
 }
 
-.rectangle-php {
-    background-color: #4F5B93;
+.social-box i {
+    font-size: 24px;
+    margin-right: 20px;
 }
 
-.rectangle:not(.rectangle-light-red):not(.rectangle-php):hover {
-    box-shadow: 0 0 35px rgba(255, 215, 0, 0.6)
+.occupation-box {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #14C871;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
+    margin-top: 10px;
+    transition: box-shadow 0.3s ease;
 }
 
-.rectangle-light-red:hover {
-    box-shadow: 0 0 35px rgba(0, 123, 255, 0.6);
-}
-
-.rectangle-php:hover {
-    box-shadow: 0 0 35px rgba(111, 112, 179, 0.6);
-}
-
-.rectangle .subtitle {
-    font-size: 0.9em;
-    color: #ffffffb3;
-}
-
-.rectangle .conteudo {
-    margin-top: 67px;
-    color: #ffffffb3;
-}
-
-.rectangle .arrow {
-    position: fixed;
-    margin-left: 180px;
-    margin-top: 120px;
-}
-
-.conteudo {
-    margin-top: 40px;
+.occupation-box:hover {
+    box-shadow: 0px 4px 35px rgba(0, 255, 0, 0.5);
 }

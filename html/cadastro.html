@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CODEQUEST</title>
-    <link rel="stylesheet" href="/css/cadastro.css">
+    <link rel="stylesheet" href="/Code_quest/css/cadastro.css">
 
 </head>
 
@@ -277,28 +277,23 @@
             <div class="content">
                 <h2>BEM-VINDO AO CODEQUEST</h2>
                 <div class="form">
-                    <div class="inputBox">
-                        <input type="text" required>
-                        <i>INSIRA SEU USUÁRIO</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="password" required>
-                        <i>INSIRA SUA SENHA</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="password" required>
-                        <i>INSIRA SEU EMAIL</i>
-                    </div>
-
-
-                    <div class="cpf-email-container">
+                    <form action="http://localhost/Code_quest/registrar.php" method="POST">
                         <div class="inputBox">
-
+                            <input type="text" name="usuario" required>
+                            <i>INSIRA SEU USUÁRIO</i>
                         </div>
-                    </div>
-                    <div class="inputBox">
-                        <input type="submit" value="Registrar">
-                    </div>
+                        <div class="inputBox">
+                            <input type="password" name="senha" required>
+                            <i>INSIRA SUA SENHA</i>
+                        </div>
+                        <div class="inputBox">
+                            <input type="email" name="email" required>
+                            <i>INSIRA SEU EMAIL</i>
+                        </div>
+                        <div class="inputBox">
+                            <input type="submit" value="Registrar">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
