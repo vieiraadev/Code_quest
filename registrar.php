@@ -16,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
     $email = $_POST['email'];
+    $github = isset($_POST['github']) ? $_POST['github'] : null;
+    $linkedin = isset($_POST['linkedin']) ? $_POST['linkedin'] : null;
 
     // Verifica se o nome de usuário já existe
     $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE usuario = ?");
@@ -30,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Prepara e executa a inserção no banco de dados
         $stmt->close(); // Fecha a consulta anterior
 
-        $stmt = $conexao->prepare("INSERT INTO usuarios (usuario, senha, email) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $usuario, password_hash($senha, PASSWORD_DEFAULT), $email); // Criptografa a senha
+        $stmt = $conexao->prepare("INSERT INTO usuarios (usuario, senha, email, github, linkedin) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $usuario, password_hash($senha, PASSWORD_DEFAULT), $email, $github, $linkedin);
 
         if ($stmt->execute()) {
             echo "Cadastro realizado com sucesso!";
