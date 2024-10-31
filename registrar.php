@@ -19,15 +19,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $github = isset($_POST['github']) ? $_POST['github'] : null;
     $linkedin = isset($_POST['linkedin']) ? $_POST['linkedin'] : null;
 
-    // Verifica se o nome de usuário já existe
-    $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE usuario = ?");
-    $stmt->bind_param("s", $usuario);
+    // Verifica se o nome de usuário ou o email já existem
+    $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE usuario = ? OR email = ?");
+    $stmt->bind_param("ss", $usuario, $email);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
     if ($resultado->num_rows > 0) {
-        // Usuário já existe
-        echo "Este nome de usuário já está em uso. Tente outro.";
+        // Verifica se o conflito é de nome de usuário ou email
+        $linha = $resultado->fetch_assoc();
+        if ($linha['usuario'] === $usuario) {
+            echo "Usuário já utilizado.";
+        } elseif ($linha['email'] === $email) {
+            echo "Email já utilizado.";
+        }
     } else {
         // Prepara e executa a inserção no banco de dados
         $stmt->close(); // Fecha a consulta anterior

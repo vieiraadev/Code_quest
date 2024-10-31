@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>CODEQUEST</title>
-  <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/Code_quest/css/login.css">
 
 </head>
 
@@ -277,18 +277,21 @@
       <div class="content">
         <h2>CODEQUEST</h2>
         <div class="form">
-          <div class="inputBox">
-            <input type="text" required>
-            <i>Usúario</i>
-          </div>
-          <div class="inputBox">
-            <input type="password" required>
-            <i>Senha</i>
-          </div>
-          <div class="button-group">
-            <input type="submit" value="Login">
-            <input type="button" value="Registrar">
-          </div>
+          <form action="http://localhost/Code_quest/login.php" method="POST">
+
+            <div class="inputBox">
+              <input type="text" name="usuario" required>
+              <i>Usuário</i>
+            </div>
+            <div class="inputBox">
+              <input type="password" name="senha" required>
+              <i>Senha</i>
+            </div>
+            <div class="button-group">
+              <input type="submit" value="Login">
+              <input type="button" value="Registrar" onclick="window.location.href='register.php'">
+            </div>
+          </form>
         </div>
       </div>
     </div>
