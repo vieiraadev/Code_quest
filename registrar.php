@@ -17,14 +17,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha'];
     $email = $_POST['email'];
 
-    // Prepara e executa a inserção no banco de dados
-    $stmt = $conexao->prepare("INSERT INTO usuarios (usuario, senha, email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $usuario, $senha, $email);
+    // Verifica se o nome de usuário já existe
+    $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE usuario = ?");
+    $stmt->bind_param("s", $usuario);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
 
-    if ($stmt->execute()) {
-        echo "Cadastro realizado com sucesso!";
+    if ($resultado->num_rows > 0) {
+        // Usuário já existe
+        echo "Este nome de usuário já está em uso. Tente outro.";
     } else {
-        echo "Erro: " . $stmt->error;
+        // Prepara e executa a inserção no banco de dados
+        $stmt->close(); // Fecha a consulta anterior
+
+        $stmt = $conexao->prepare("INSERT INTO usuarios (usuario, senha, email) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $usuario, password_hash($senha, PASSWORD_DEFAULT), $email); // Criptografa a senha
+
+        if ($stmt->execute()) {
+            echo "Cadastro realizado com sucesso!";
+        } else {
+            echo "Erro: " . $stmt->error;
+        }
     }
 
     $stmt->close();
