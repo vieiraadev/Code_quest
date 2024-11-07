@@ -476,23 +476,6 @@ main {
   font-weight: bold;
 }
 
-#answers-box button {
-  display: flex;
-  align-items: stretch;
-  margin: 15px 0;
-  width: 100%;
-  border: none;
-  text-align: left;
-  color: #222222;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-#answers-box button:hover {
-  background-color: #2a272a;
-  color: #fff;
-}
-
 #answers-box .btn-letter {
   font-size: 30px;
   font-weight: bold;
@@ -581,4 +564,14 @@ main {
 
 .lives i.lost {
   color: #cccccc;
+}
+
+.answer-button.correct {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.answer-button.incorrect {
+  background-color: #f44336;
+  color: white;
 }

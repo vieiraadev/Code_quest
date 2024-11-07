@@ -1,263 +1,59 @@
-const question = document.querySelector('#question');
-const answerBox = document.querySelector('#answers-box');
-const quizzContainer = document.querySelector('#quizz-container');
-const scoreContainer = document.querySelector('#score-container');
-const letters = ['a', 'b', 'c', 'd', 'e'];
-let points = 0;
-let actualQuestion = 0;
+let lastQuestionId = 0; // Variável para controlar o ID da última pergunta respondida
 
-const questions = [
-  {
-    question: 'Uma forma de declarar variável em JavaScript:',
-    answers: [
-      {
-        answer: '$var',
-        correct: false,
-      },
-      {
-        answer: 'var',
-        correct: true,
-      },
-      {
-        answer: '@var',
-        correct: false,
-      },
-      {
-        answer: '-var',
-        correct: false,
-      },
-      {
-        answer: '&var',
-        correct: false,
-      },
-    ],
-  },
-  {
-    question: 'Qual operador é utilizado para comparar valores e tipos em JavaScript?',
-    answers: [
-      {
-        answer: '===',
-        correct: true,
-      },
-      {
-        answer: '!=',
-        correct: false,
-      },
-      {
-        answer: '==',
-        correct: false,
-      },
-      {
-        answer: '<>',
-        correct: false,
-      },
-      {
-        answer: '&&',
-        correct: false,
-      },
-    ],
-  },
-  {
-    question: 'Qual é o resultado de typeof null em JavaScript?',
-    answers: [
-      {
-        answer: 'object',
-        correct: true,
-      },
-      {
-        answer: 'null',
-        correct: false,
-      },
-      {
-        answer: 'undefined',
-        correct: false,
-      },
-      {
-        answer: 'boolean',
-        correct: false,
-      },
-      {
-        answer: 'function',
-        correct: false,
-      },
-    ],
-  },
-  {
-    question: 'Qual método JavaScript converte uma string para um número inteiro',
-    answers: [
-      {
-        answer: 'Number()',
-        correct: false,
-      },
-      {
-        answer: 'parseInt()',
-        correct: true,
-      },
-      {
-        answer: 'parseFloat()',
-        correct: false,
-      },
-      {
-        answer: 'toInteger()',
-        correct: false,
-      },
-      {
-        answer: 'convert()',
-        correct: false,
-      },
-    ],
-  },
-  {
-    question: 'Qual comando é utilizado para sair de um loop em JavaScript?',
-    answers: [
-      {
-        answer: 'exit',
-        correct: false,
-      },
-      {
-        answer: 'stop',
-        correct: false,
-      },
-      {
-        answer: 'return',
-        correct: false,
-      },
-      {
-        answer: 'break',
-        correct: true,
-      },
-      {
-        answer: 'quit',
-        correct: false,
-      },
-    ],
-  },
+document.addEventListener("DOMContentLoaded", loadQuestion);
 
-
-];
-
-function init() {
-  createQuestion(0);
-}
-
-// cria uma pergunta
-function createQuestion(i) {
-  // limpar questão anterior
-  const oldButtons = answerBox.querySelectorAll('button');
-  oldButtons.forEach((btn) => {
-    btn.remove();
-  });
-  // alterar texto da pergunta
-  const questionText = question.querySelector('#question-text');
-  const questionNumber = question.querySelector('#question-number');
-
-  questionText.textContent = questions[i].question;
-  questionNumber.textContent = i + 1;
-
-  // inserir alternativas
-  questions[i].answers.forEach((answer, i) => {
-    // cria template botão quizz
-    const answerTemplate = document.querySelector('.answer-template').cloneNode(true);
-
-    const letterBtn = answerTemplate.querySelector('.btn-letter');
-    const answerText = answerTemplate.querySelector('.question-answer');
-
-    letterBtn.textContent = letters[i];
-    answerText.textContent = answer['answer'];
-
-    answerTemplate.setAttribute('correct-answer', answer['correct']);
-
-    // remover hide e template class
-    answerTemplate.classList.remove('hide');
-    answerTemplate.classList.remove('answer-template');
-
-    // inserir alternativa na tela
-    answerBox.appendChild(answerTemplate);
-
-    // inserir evento click no botão
-    answerTemplate.addEventListener('click', function () {
-      checkAnswer(this);
-    });
-  });
-
-  // incrementar o número da questão
-  actualQuestion++;
-}
-
-// verificar resposta do usuário
-function checkAnswer(btn) {
-  // seleciona todos os botões
-  const buttons = answerBox.querySelectorAll('button');
-
-  // verifica se resposta correta e add classe
-  buttons.forEach((button) => {
-    if (button.getAttribute('correct-answer') == 'true') {
-      button.classList.add('correct-answer');
-
-      // checa se usuário acertou a pergunta
-      if (btn === button) {
-        // incremento dos pontos
-        points++;
+// Função para carregar a próxima pergunta
+function loadQuestion() {
+  fetch(`../load_question.php?last_question_id=${lastQuestionId}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.end) {
+        alert("Parabéns! Você completou todas as questões.");
+      } else {
+        displayQuestion(data);
       }
-    } else {
-      button.classList.add('wrong-answer');
-    }
+    })
+    .catch(error => console.error("Erro ao carregar a pergunta:", error));
+}
+
+// Função para exibir a pergunta e as alternativas na página
+function displayQuestion(data) {
+  document.getElementById('question-number').innerText = data.question.question_id;
+  document.getElementById('question-text').innerText = data.question.question_text;
+  lastQuestionId = data.question.question_id; // Atualiza o ID da última pergunta
+
+  const answersBox = document.getElementById('answers-box');
+  answersBox.innerHTML = ''; // Limpa alternativas anteriores
+
+  data.choices.forEach(choice => {
+    const button = document.createElement('button');
+    button.classList.add('answer-button');
+    button.innerHTML = `<span class="btn-letter">${choice.label}</span> <span class="question-answer">${choice.text}</span>`;
+    button.onclick = () => submitAnswer(choice.label, button);
+    answersBox.appendChild(button);
   });
-
-  // exibir próxima pergunta
-  nextQuestion();
 }
 
-// exibe a pŕoxima pergunta no quizz
-function nextQuestion() {
-  // timer para usuário ver as respostas
-  setTimeout(function () {
-    // verifica se ainda há perguntas
-    if (actualQuestion >= questions.length) {
-      // apresenta mensagem de sucesso
-      showSuccessMessage();
-      return;
-    }
+// Função para enviar a resposta selecionada ao servidor
+function submitAnswer(selectedChoice, button) {
+  const questionId = document.getElementById('question-number').innerText;
 
-    createQuestion(actualQuestion);
-  }, 1200);
+  fetch('../check_answer.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question_id: questionId, selected_choice: selectedChoice })
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Se a resposta estiver correta, marca o botão como verde; caso contrário, como vermelho
+      if (data.correct) {
+        button.classList.add('correct'); // Adiciona classe para resposta correta (verde)
+      } else {
+        button.classList.add('incorrect'); // Adiciona classe para resposta incorreta (vermelho)
+      }
+
+      // Espera 1.5 segundos e carrega a próxima pergunta
+      setTimeout(loadQuestion, 1500);
+    })
+    .catch(error => console.error("Erro ao verificar a resposta:", error));
 }
-
-// exibe a tela final
-function showSuccessMessage() {
-  hideOrShowQuizz();
-
-  // trocar dados tela de sucesso
-  // calcular score
-  const score = ((points / questions.length) * 100).toFixed(2);
-
-  const displayScore = document.querySelector('#display-score span');
-  displayScore.textContent = score.toString();
-
-  //alterar o número de perguntas corretas
-  const correctAnswers = document.querySelector('#correct-answers');
-  correctAnswers.textContent = points;
-
-  // alterar o total de perguntas
-  const totalQuestions = document.querySelector('#questions-qty');
-  totalQuestions.textContent = questions.length;
-}
-
-// mostra ou esonde o score
-function hideOrShowQuizz() {
-  quizzContainer.classList.toggle('hide');
-  scoreContainer.classList.toggle('hide');
-}
-
-// reiniciar quizz
-const restartBtn = document.querySelector('#restart');
-restartBtn.addEventListener('click', function () {
-  //zerar jogo
-  actualQuestion = 0;
-  points = 0;
-  hideOrShowQuizz();
-  init();
-});
-
-// inicialização do quizz
-init();

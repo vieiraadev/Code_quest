@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,43 +7,24 @@
   <title>CODEQUEST</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet" />
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
-  <link rel="stylesheet" href="/css/quiz.css" />
-  <script src="/js/quiz.js" defer></script>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/Code_quest/css/quiz.css">
+  <script src="../js/quiz.js" defer></script>
 </head>
 
 <body>
   <div id="nav-bar">
-    <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a>
-    </div>
+    <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a></div>
     <div id="nav-content">
-      <div class="nav-button">
-        <i class="fas fa-cubes"></i>
-        <span>Módulos</span>
-      </div>
-      <div class="nav-button">
-        <i class="fas fa-file-pdf"></i>
-        <span>PDFS</span>
-      </div>
-
-      <div class="nav-button">
-        <i class="fas fa-home"></i>
-        <span>Home</span>
-      </div>
-
-      <div class="nav-button">
-        <i class="fas fa-question-circle"></i>
-        <span>Ajuda</span>
-      </div>
-      <div class="nav-button">
-        <i class="fas fa-user"></i>
-        <span>Perfil</span>
-      </div>
-
+      <div class="nav-button"><i class="fas fa-cubes"></i><span>Módulos</span></div>
+      <div class="nav-button"><i class="fas fa-file-pdf"></i><span>PDFS</span></div>
+      <div class="nav-button"><i class="fas fa-home"></i><span>Home</span></div>
+      <div class="nav-button"><i class="fas fa-question-circle"></i><span>Ajuda</span></div>
+      <div class="nav-button"><i class="fas fa-user"></i><span>Perfil</span></div>
       <div id="nav-content-highlight"></div>
     </div>
   </div>
+
   <div class="progress-container">
     <div class="progress-bar">
       <div class="progress"></div>
@@ -56,34 +37,23 @@
       <i class="fas fa-heart" id="life5"></i>
     </div>
   </div>
+
   <div class="container">
     <main>
       <div id="quizz-container">
         <p id="question">
           <span id="question-number">1</span> &#8212;
-          <span id="question-text">Qual é a unidade de medida para metros?</span>
+          <span id="question-text">Carregando pergunta...</span>
         </p>
         <div id="answers-box">
-          <button><span class="btn-letter"></span> <span class="question-answer"></span></button>
-          <button><span class="btn-letter"></span> <span class="question-answer"></span></button>
-          <button><span class="btn-letter"></span> <span class="question-answer"></span></button>
-          <button><span class="btn-letter"></span> <span class="question-answer"></span></button>
-          <button><span class="btn-letter"></span> <span class="question-answer"></span></button>
+          <!-- Botões de resposta carregados dinamicamente -->
         </div>
       </div>
 
-      <div id="score-container" class="hide">
-        <h2>Parabéns</h2>
-        <p id="display-score"><span>90</span>%</p>
-        <p>
-          Você acertou <span id="correct-answers">0</span> de
-          <span id="questions-qty">10</span> perguntas
-        </p>
-        <button id="restart">Refazer quizz!</button>
+      <div id="feedback-popup" class="hide">
+        <p id="feedback-message"></p>
+        <button onclick="closePopup()">Próxima Questão</button>
       </div>
-      <button class="answer-template hide">
-        <span class="btn-letter"></span> <span class="question-answer"></span>
-      </button>
     </main>
   </div>
 </body>
