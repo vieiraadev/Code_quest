@@ -7,8 +7,8 @@ error_reporting(E_ALL);
 session_start();
 
 $host = "localhost";
-$usuario = "root"; // Usuário do MySQL (pode ser "root")
-$senha = ""; // Senha do MySQL (deixe vazia se for o padrão)
+$usuario = "root";
+$senha = ""; 
 $database = "db_codequest";
 
 $conexao = new mysqli($host, $usuario, $senha, $database);
@@ -22,30 +22,39 @@ if ($conexao->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
-
-    // Consulta para verificar se o usuário existe no banco de dados
-    $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE usuario = ?");
-    $stmt->bind_param("s", $usuario);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-
-    if ($resultado->num_rows > 0) {
-        $user = $resultado->fetch_assoc();
-
-        // Verifica se a senha está correta
-        if (password_verify($senha, $user['senha'])) {
-            // Login bem-sucedido, inicia sessão para o usuário
-            $_SESSION['usuario'] = $usuario;
-            echo "Login realizado com sucesso!"; // Redirecione para a área interna do sistema, se necessário
-            exit;
-        } else {
-            echo "Senha incorreta.";
+    
+    // Função para verificar o usuário em uma tabela específica
+    function verificar_usuario($conexao, $usuario, $senha, $tabela) {
+        $stmt = $conexao->prepare("SELECT * FROM $tabela WHERE usuario = ?");
+        $stmt->bind_param("s", $usuario);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        
+        if ($resultado->num_rows > 0) {
+            $user = $resultado->fetch_assoc();
+            if (password_verify($senha, $user['senha'])) {
+                // Retorna verdadeiro se o login foi bem-sucedido
+                return true;
+            } else {
+                echo "Senha incorreta.";
+                return false;
+            }
         }
+        return false;
+    }
+    
+    // Verifica nas tabelas alunos e professores
+    if (verificar_usuario($conexao, $usuario, $senha, "alunos")) {
+        $_SESSION['usuario'] = $usuario;
+        $_SESSION['tipo_usuario'] = "aluno";
+        echo "Login realizado com sucesso como Aluno!";
+    } elseif (verificar_usuario($conexao, $usuario, $senha, "professores")) {
+        $_SESSION['usuario'] = $usuario;
+        $_SESSION['tipo_usuario'] = "professor";
+        echo "Login realizado com sucesso como Professor!";
     } else {
         echo "Usuário não possui uma conta registrada.";
     }
-
-    $stmt->close();
 }
 
 $conexao->close();

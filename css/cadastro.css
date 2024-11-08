@@ -186,6 +186,33 @@ section span:hover {
     box-shadow: 0 0 10px #c0091c, 0 0 20px #c0091c;
 }
 
+.signin .content .form .inputBox select {
+    width: 100%;
+    background: #333;
+    border: none;
+    outline: none;
+    padding: 25px 10px 7.5px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+    appearance: none;
+    /* Remove a seta padrão */
+}
+
+.signin .content .form .inputBox select:focus~i,
+.signin .content .form .inputBox select:valid~i {
+    transform: translateY(-7.5px);
+    font-size: 0.8em;
+    color: #fff;
+}
+
+.signin .content .form .inputBox select option {
+    background: #333;
+    color: #fff;
+}
+
+
 input[type="submit"]:active {
     opacity: 0.6;
 }

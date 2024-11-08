@@ -101,12 +101,15 @@ section span:hover {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
+  /* Aumentando o gap entre os campos */
 }
 
 .signin .content .form .inputBox {
   position: relative;
   width: 100%;
+  margin-bottom: 15px;
+  /* Adicionando espaço inferior a cada campo */
 }
 
 .signin .content .form .inputBox input {

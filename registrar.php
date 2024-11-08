@@ -18,9 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $github = isset($_POST['github']) ? $_POST['github'] : null;
     $linkedin = isset($_POST['linkedin']) ? $_POST['linkedin'] : null;
+    $tipo_usuario = $_POST['tipo_usuario'];
 
-    // Verifica se o nome de usuário ou o email já existem
-    $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE usuario = ? OR email = ?");
+    // Verifica se o nome de usuário ou o email já existem na tabela apropriada
+    $tabela = ($tipo_usuario === "aluno") ? "alunos" : "professores";
+
+    $stmt = $conexao->prepare("SELECT * FROM $tabela WHERE usuario = ? OR email = ?");
     $stmt->bind_param("ss", $usuario, $email);
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -34,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Email já utilizado.";
         }
     } else {
-        // Prepara e executa a inserção no banco de dados
+        // Prepara e executa a inserção na tabela correspondente
         $stmt->close(); // Fecha a consulta anterior
 
-        $stmt = $conexao->prepare("INSERT INTO usuarios (usuario, senha, email, github, linkedin) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conexao->prepare("INSERT INTO $tabela (usuario, senha, email, github, linkedin) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $usuario, password_hash($senha, PASSWORD_DEFAULT), $email, $github, $linkedin);
 
         if ($stmt->execute()) {
