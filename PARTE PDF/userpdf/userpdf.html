@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="userpdf.css">
+</head>
+<body>
+    <div id="nav-bar">
+        <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a>
+        </div>
+        <div id="nav-content">
+            <div class="nav-button">
+                <i class="fas fa-cubes"></i>
+                <span>Módulos</span>
+            </div>
+            <div class="nav-button">
+                <i class="fas fa-file-pdf"></i>
+                <span>PDFS</span>
+            </div>
+
+            <div class="nav-button">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+
+            <div class="nav-button">
+                <i class="fas fa-question-circle"></i>
+                <span>Ajuda</span>
+            </div>
+            <div class="nav-button">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </div>
+
+            <div id="nav-content-highlight"></div>
+        </div>
+    </div>
+    <h1>PDFs Para Estudo</h1>
+    <ul id="fileList" class="arquivos"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="userpdf.js"></script>
+</body>
+</html>
