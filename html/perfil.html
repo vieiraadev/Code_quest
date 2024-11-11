@@ -4,38 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeQuest</title>
-    <link rel="stylesheet" href="/css/perfil.css">
+    <title>Perfil - CodeQuest</title>
+    <link rel="stylesheet" href="/code_quest/css/perfil.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
 </head>
 
 <body>
-
     <div id="nav-bar">
-        <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a>
-        </div>
+        <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a></div>
         <div id="nav-content">
-            <a href="modulos.html" class="nav-button">
-                <i class="fas fa-cubes"></i>
-                <span>Módulos</span>
-            </a>
-            <a href="pdfs.html" class="nav-button">
-                <i class="fas fa-file-pdf"></i>
-                <span>PDFS</span>
-            </a>
-            <a href="home.html" class="nav-button">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
-            <a href="ajuda.html" class="nav-button">
-                <i class="fas fa-question-circle"></i>
-                <span>Ajuda</span>
-            </a>
-            <a href="perfil.html" class="nav-button">
-                <i class="fas fa-user"></i>
-                <span>Perfil</span>
-            </a>
+            <a href="modulos.html" class="nav-button"><i class="fas fa-cubes"></i><span>Módulos</span></a>
+            <a href="pdfs.html" class="nav-button"><i class="fas fa-file-pdf"></i><span>PDFS</span></a>
+            <a href="home.html" class="nav-button"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="ajuda.html" class="nav-button"><i class="fas fa-question-circle"></i><span>Ajuda</span></a>
+            <a href="perfil.php" class="nav-button"><i class="fas fa-user"></i><span>Perfil</span></a>
             <div id="nav-content-highlight"></div>
         </div>
     </div>
@@ -43,36 +26,39 @@
     <div class="profile-content">
         <div class="main-infos">
             <div class="profile-photo">
-                <img src="/img/image.png" alt="">
-
+                <img src="/img/image.png" alt="Foto do perfil">
             </div>
-
             <div class="main-name">
-                <p>admin</p>
+                <p>
+                    <?php echo htmlspecialchars($usuario['nome']); ?>
+                </p>
             </div>
-
             <div class="occupation-info">
-                <p class="occupation-box">Curadoria</p>
+                <p class="occupation-box">
+                    <?php echo ucfirst($tipo_usuario); ?>
+                </p>
             </div>
             <div class="social-media-info">
                 <div class="social-box">
-                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/username</a>
+                    <a href="<?php echo htmlspecialchars($usuario['linkedin']); ?>" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <?php echo htmlspecialchars($usuario['linkedin']); ?>
+                    </a>
                 </div>
                 <div class="social-box">
-                    <a href="#" target="_blank"><i class="fab fa-github"></i> github.com/username</a>
+                    <a href="<?php echo htmlspecialchars($usuario['github']); ?>" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <?php echo htmlspecialchars($usuario['github']); ?>
+                    </a>
                 </div>
                 <div class="social-box">
-                    <a><i class="fas fa-envelope"></i> email@example.com</a>
+                    <a><i class="fas fa-envelope"></i>
+                        <?php echo htmlspecialchars($usuario['email']); ?>
+                    </a>
                 </div>
             </div>
-
-
         </div>
-
     </div>
-
-    </div>
-
 </body>
 
 </html>

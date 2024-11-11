@@ -33,10 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($resultado->num_rows > 0) {
             $user = $resultado->fetch_assoc();
             if (password_verify($senha, $user['senha'])) {
-                // Retorna verdadeiro se o login foi bem-sucedido
-                return true;
+                return true; // Retorna verdadeiro se o login foi bem-sucedido
             } else {
-                echo "Senha incorreta.";
                 return false;
             }
         }
@@ -44,16 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     // Verifica nas tabelas alunos e professores
-    if (verificar_usuario($conexao, $usuario, $senha, "alunos")) {
+    if (verificar_usuario($conexao, $usuario, $senha, "alunos") || verificar_usuario($conexao, $usuario, $senha, "professores")) {
         $_SESSION['usuario'] = $usuario;
-        $_SESSION['tipo_usuario'] = "aluno";
-        echo "Login realizado com sucesso como Aluno!";
-    } elseif (verificar_usuario($conexao, $usuario, $senha, "professores")) {
-        $_SESSION['usuario'] = $usuario;
-        $_SESSION['tipo_usuario'] = "professor";
-        echo "Login realizado com sucesso como Professor!";
+        header("Location: /code_quest/html/modulos.html"); // Redireciona ao módulo se o login for válido
+        exit();
     } else {
-        echo "Usuário não possui uma conta registrada.";
+        // Redireciona de volta ao login com mensagem de erro
+        header("Location: /code_quest/html/login.html?error=1");
+        exit();
     }
 }
 
