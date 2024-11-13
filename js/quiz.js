@@ -1,6 +1,21 @@
 let lastQuestionId = 0; // Variável para controlar o ID da última pergunta respondida
+let lives = 5; // Vidas do aluno, inicializado com o valor máximo
 
-document.addEventListener("DOMContentLoaded", loadQuestion);
+document.addEventListener("DOMContentLoaded", () => {
+  fetchLives(); // Carrega o número de vidas do banco de dados ao iniciar
+  loadQuestion(); // Carrega a primeira pergunta
+});
+
+// Função para carregar o número de vidas do banco de dados
+function fetchLives() {
+  fetch('../fetch_lives.php') // Assumindo que existe um script PHP que retorna o número de vidas
+    .then(response => response.json())
+    .then(data => {
+      lives = data.lives; // Atualiza a quantidade de vidas com o valor do banco de dados
+      updateLivesDisplay(); // Exibe as vidas na interface
+    })
+    .catch(error => console.error("Erro ao buscar o número de vidas:", error));
+}
 
 // Função para carregar a próxima pergunta
 function loadQuestion() {
@@ -38,6 +53,10 @@ function displayQuestion(data) {
 function submitAnswer(selectedChoice, button) {
   const questionId = document.getElementById('question-number').innerText;
 
+  // Desabilita todos os botões de resposta para evitar múltiplos cliques
+  const answerButtons = document.querySelectorAll('.answer-button');
+  answerButtons.forEach(btn => btn.disabled = true);
+
   fetch('../check_answer.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -50,10 +69,53 @@ function submitAnswer(selectedChoice, button) {
         button.classList.add('correct'); // Adiciona classe para resposta correta (verde)
       } else {
         button.classList.add('incorrect'); // Adiciona classe para resposta incorreta (vermelho)
+        loseLife(); // Chama a função para perder uma vida
       }
 
       // Espera 1.5 segundos e carrega a próxima pergunta
       setTimeout(loadQuestion, 1500);
     })
     .catch(error => console.error("Erro ao verificar a resposta:", error));
+}
+
+// Função para perder uma vida
+function loseLife() {
+  if (lives > 0) {
+    lives -= 1; // Decrementa o número de vidas
+    updateLivesDisplay(); // Atualiza a exibição das vidas
+
+    // Atualiza no banco de dados
+    fetch('../update_life.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ decrement: 1 }) // Envia o decremento
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (!data.success) {
+          console.error("Erro ao atualizar vida no banco:", data.message);
+        }
+      })
+      .catch(error => console.error("Erro ao atualizar vida:", error));
+
+    // Verifica se o usuário perdeu todas as vidas
+    if (lives === 0) {
+      alert("Você perdeu todas as vidas! Tente novamente.");
+      disableQuiz(); // Desabilita o quiz se não houver mais vidas
+    }
+  }
+}
+
+// Função para atualizar a exibição das vidas na interface
+function updateLivesDisplay() {
+  for (let i = 1; i <= 5; i++) {
+    const heart = document.getElementById(`life${i}`);
+    heart.classList.toggle('lost', i > lives); // Marca os corações além do número de vidas como 'perdidos'
+  }
+}
+
+// Função para desabilitar o quiz
+function disableQuiz() {
+  const answerButtons = document.querySelectorAll('.answer-button');
+  answerButtons.forEach(btn => btn.disabled = true);
 }
