@@ -9,10 +9,8 @@
 </head>
 
 <body>
-
     <div id="nav-bar">
-        <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a>
-        </div>
+        <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a></div>
         <div id="nav-content">
             <a href="modulos.html" class="nav-button">
                 <i class="fas fa-cubes"></i>
@@ -36,7 +34,6 @@
             </a>
             <div id="nav-content-highlight"></div>
         </div>
-
     </div>
 
     <div id="main-content">
@@ -46,6 +43,9 @@
                 maior assistência, nossa equipe de suporte está sempre pronta para ajudar.</p>
 
             <div class="faq-container">
+                <div class="faq-container">
+                    <!-- Perguntas serão carregadas dinamicamente aqui -->
+                </div>
                 <div class="faq-item">
                     <button class="faq-question">Quão seguros estão meus dados com CODEQUEST?</button>
                     <p class="faq-answer">CODEQUEST utiliza criptografia avançada para garantir que seus dados estejam
@@ -65,47 +65,17 @@
                     <h2>Não encontrou sua resposta? Envie sua pergunta:</h2>
                     <textarea id="user-question" rows="5" placeholder="Digite sua pergunta aqui..."></textarea>
                     <button id="submit-question">Enviar</button>
-                </div>
-
-                <div vw class="enabled">
-                    <div vw-access-button class="active"></div>
-                    <div vw-plugin-wrapper>
-                        <div class="vw-plugin-top-wrapper"></div>
-                    </div>
+                    <p id="status-message"></p>
                 </div>
             </div>
-            <div vw class="enabled">
-                <div vw-access-button class="active"></div>
-                <div vw-plugin-wrapper>
-                    <div class="vw-plugin-top-wrapper"></div>
-                </div>
-            </div>
-            <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-            <script>
-                new window.VLibras.Widget('https://vlibras.gov.br/app');
-            </script>
         </section>
     </div>
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
+
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-
-    <script>
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentNode;
-                faqItem.classList.toggle('active');
-            });
-        });
-    </script>
-
+    <script src="../js/faq.js"></script>
 </body>
 
 </html>
