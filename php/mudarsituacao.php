@@ -1,8 +1,8 @@
 <?php
-$host = "localhost:3306";
-$usuario = "root";
-$senha = "";
-$database = 'db_codequest';
+$host = 'localhost';
+$db = 'db_codequest';
+$user = 'root';
+$password = '';
 
 $conexao = new mysqli($host, $usuario, $senha, $database);
 if ($conexao->connect_error) {

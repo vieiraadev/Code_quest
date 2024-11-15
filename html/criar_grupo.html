@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/criar_grupo.css">
+    <title>Criar Grupo</title>
+    <style>
+        .grupos-container {
+            margin-top: 20px;
+        }
+
+        .grupo {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .grupo h3 {
+            margin: 0;
+        }
+
+        .grupo button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Criar Novo Grupo</h1>
+
+    <!-- Formulário para criar grupo -->
+    <form id="form-criar-grupo">
+        <label for="nome_grupo">Nome do Grupo:</label><br>
+        <input type="text" id="nome_grupo" name="nome_grupo" required><br><br>
+
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" rows="4" required></textarea><br><br>
+
+        <label for="max_integrantes">Máximo de Integrantes:</label><br>
+        <input type="number" id="max_integrantes" name="max_integrantes" min="1" required><br><br>
+
+        <button type="submit">Criar Grupo</button>
+    </form>
+
+    <!-- Área "Meus Grupos" -->
+    <div class="grupos-container" id="meus-grupos">
+        <h2>Meus Grupos</h2>
+        <!-- Grupos serão carregados dinamicamente -->
+    </div>
+
+    <div id="chat-modal" style="display: none;">
+        <div class="chat-content">
+            <h3 id="chat-grupo-nome"></h3>
+            <div id="mensagens" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;"></div>
+            <textarea id="nova-mensagem" placeholder="Digite sua mensagem"></textarea>
+            <button id="enviar-mensagem">Enviar</button>
+            <button id="fechar-chat">Fechar</button>
+        </div>
+    </div>
+
+    <script src="../js/criar_grupo.js"></script>
+    <script src="../js/chat_grupo.js"></script>
+</body>
+
+</html>

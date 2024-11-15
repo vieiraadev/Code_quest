@@ -6,10 +6,10 @@ error_reporting(E_ALL);
 // Inicia a sessão
 session_start();
 
-$host = "localhost:3306";
-$usuario = "root";
-$senha = ""; 
-$database = "db_codequest";
+$host = 'localhost';
+$db = 'db_codequest';
+$user = 'root';
+$password = '';
 
 $conexao = new mysqli($host, $usuario, $senha, $database);
 
