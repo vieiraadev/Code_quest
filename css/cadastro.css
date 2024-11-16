@@ -35,7 +35,7 @@ section::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(#000, #940000, #000);
+    background: linear-gradient(#000, #ffc107, #000);
     animation: animate 5s linear infinite;
 }
 
@@ -62,7 +62,7 @@ section span {
 }
 
 section span:hover {
-    background: #aa040e;
+    background: #ffc107;
     transition: 0s;
 }
 
@@ -173,7 +173,7 @@ section span:hover {
 
 .signin .content .form .inputBox input[type="submit"] {
     padding: 10px;
-    background: #c0091c;
+    background: #ffc107;
     color: #fff;
     font-weight: 600;
     font-size: 1.35em;
@@ -183,7 +183,7 @@ section span:hover {
 }
 
 .signin .content .form .inputBox input[type="submit"]:hover {
-    box-shadow: 0 0 10px #c0091c, 0 0 20px #c0091c;
+    box-shadow: 0 0 10px #ffc107, 0 0 20px #ffc107;
 }
 
 .signin .content .form .inputBox select {
