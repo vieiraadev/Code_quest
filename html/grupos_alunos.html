@@ -4,31 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/grupos_alunos.css">
+    <link rel="stylesheet" href="../css/grupos_alunos.css">
     <title>Grupos Disponíveis</title>
-    <style>
-        .grupos-container {
-            margin-top: 20px;
-        }
-
-        .grupo {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        .grupo h3 {
-            margin: 0;
-        }
-
-        .grupo button {
-            margin-top: 10px;
-        }
-    </style>
 </head>
 
 <body>
+    <div id="nav-bar">
+        <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a></div>
+        <div id="nav-content">
+            <a href="modulos.html" class="nav-button">
+                <i class="fas fa-cubes"></i>
+                <span>Módulos</span>
+            </a>
+            <a href="pdfs.html" class="nav-button">
+                <i class="fas fa-file-pdf"></i>
+                <span>PDFS</span>
+            </a>
+            <a href="home.html" class="nav-button">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="ajuda.html" class="nav-button">
+                <i class="fas fa-question-circle"></i>
+                <span>Ajuda</span>
+            </a>
+            <a href="perfil.html" class="nav-button">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </a>
+            <div id="nav-content-highlight"></div>
+        </div>
+    </div>
     <h1>Grupos Disponíveis</h1>
     <div id="todos-grupos"></div>
     <div id="meus-grupos"></div>

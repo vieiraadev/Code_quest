@@ -4,31 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/criar_grupo.css">
+    <link rel="stylesheet" href="../css/criar_grupo.css">
     <title>Criar Grupo</title>
-    <style>
-        .grupos-container {
-            margin-top: 20px;
-        }
-
-        .grupo {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        .grupo h3 {
-            margin: 0;
-        }
-
-        .grupo button {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 
 <body>
+    <div id="nav-bar">
+        <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a></div>
+        <div id="nav-content">
+            <a href="modulos.html" class="nav-button">
+                <i class="fas fa-cubes"></i>
+                <span>Módulos</span>
+            </a>
+            <a href="pdfs.html" class="nav-button">
+                <i class="fas fa-file-pdf"></i>
+                <span>PDFS</span>
+            </a>
+            <a href="home.html" class="nav-button">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="ajuda.html" class="nav-button">
+                <i class="fas fa-question-circle"></i>
+                <span>Ajuda</span>
+            </a>
+            <a href="perfil.html" class="nav-button">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </a>
+            <div id="nav-content-highlight"></div>
+        </div>
+    </div>
     <h1>Criar Novo Grupo</h1>
 
     <!-- Formulário para criar grupo -->
@@ -60,6 +66,21 @@
             <button id="fechar-chat">Fechar</button>
         </div>
     </div>
+    <!-- Modal para Exibir Integrantes -->
+    <div id="modal-integrantes">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="nome-grupo-modal">Integrantes do Grupo</span>
+            </div>
+            <div class="modal-body" id="lista-integrantes">
+                <!-- Integrantes serão listados dinamicamente aqui -->
+            </div>
+            <div class="modal-footer">
+                <button id="fechar-modal-integrantes">Fechar</button>
+            </div>
+        </div>
+    </div>
+
 
     <script src="../js/criar_grupo.js"></script>
     <script src="../js/chat_grupo.js"></script>

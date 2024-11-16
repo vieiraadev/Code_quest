@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Grupos carregados:', grupos);
 
             todosGrupos.innerHTML = `
-                <h2>Grupos Disponíveis</h2>
+                <h4>Entre em grupos para compartilhar ideias.</h4>
                 ${grupos.length > 0
                     ? grupos.map(grupo => `
                         <div class="grupo" id="grupo-${grupo.id}">

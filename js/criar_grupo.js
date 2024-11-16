@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form-criar-grupo');
     const meusGrupos = document.getElementById('meus-grupos');
+    const modalIntegrantes = document.getElementById('modal-integrantes');
+    const listaIntegrantes = document.getElementById('lista-integrantes');
+    const fecharModalIntegrantes = document.getElementById('fechar-modal-integrantes');
+
 
     /**
      * Função para carregar os grupos dinamicamente e atualizar o DOM.
@@ -15,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Grupos carregados:', grupos);
 
             meusGrupos.innerHTML = `
-                <h2>Meus Grupos</h2>
+                <h4>Meus Grupos</h4>
                 ${grupos.length > 0
                     ? grupos.map(grupo => `
                         <div class="grupo" id="grupo-${grupo.id}">
@@ -35,6 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erro ao carregar os grupos:', error);
             alert('Erro ao carregar os grupos. Verifique a conexão ou tente novamente.');
         }
+    };
+    const exibirIntegrantes = (grupoNome, integrantes) => {
+        // Atualiza o título do modal
+        document.getElementById('nome-grupo-modal').innerText = `Integrantes de ${grupoNome}`;
+
+        // Atualiza a lista de integrantes
+        listaIntegrantes.innerHTML = integrantes.length > 0
+            ? integrantes.map(i => `<p>${i.nome}</p>`).join('')
+            : '<p>Este grupo ainda não possui integrantes.</p>';
+
+        // Exibe o modal
+        modalIntegrantes.style.display = 'flex';
     };
 
     /**
@@ -71,6 +87,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        document.querySelectorAll('.btn-integrantes').forEach(button => {
+            button.addEventListener('click', async () => {
+                const grupoId = button.dataset.id;
+                const grupoNome = document.querySelector(`#grupo-${grupoId} h3`).innerText;
+
+                try {
+                    console.log(`Carregando integrantes para o grupo ${grupoId}...`);
+                    const response = await fetch(`../php/ver_integrantes.php?grupo_id=${grupoId}`);
+                    if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+
+                    const integrantes = await response.json();
+                    exibirIntegrantes(grupoNome, integrantes);
+                } catch (error) {
+                    console.error(`Erro ao carregar os integrantes do grupo ${grupoId}:`, error);
+                    alert('Erro ao carregar os integrantes. Tente novamente.');
+                }
+            });
+        });
+
         // Botões de ver integrantes
         document.querySelectorAll('.btn-integrantes').forEach(button => {
             button.addEventListener('click', async () => {
@@ -86,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (integrantes.length > 0) {
                         const nomes = integrantes.map(i => i.nome).join(', ');
-                        alert(`Integrantes do Grupo ${grupoId}:\n${nomes}`);
                     } else {
                         alert(`O grupo ${grupoId} não possui integrantes no momento.`);
                     }
@@ -159,6 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         carregarMensagens();
+    };
+
+    fecharModalIntegrantes.onclick = () => {
+        modalIntegrantes.style.display = 'none';
     };
 
     /**
