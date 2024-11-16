@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Função para carregar o número de vidas do banco de dados
 function fetchLives() {
-  fetch('../fetch_lives.php') // Assumindo que existe um script PHP que retorna o número de vidas
+  fetch('/code_quest/php/fetch_lives.php')
     .then(response => response.json())
     .then(data => {
       lives = data.lives; // Atualiza a quantidade de vidas com o valor do banco de dados
@@ -19,7 +19,7 @@ function fetchLives() {
 
 // Função para carregar a próxima pergunta
 function loadQuestion() {
-  fetch(`../load_question.php?last_question_id=${lastQuestionId}`)
+  fetch(`/code_quest/php/load_question.php?last_question_id=${lastQuestionId}`)
     .then(response => response.json())
     .then(data => {
       if (data.end) {
@@ -57,7 +57,7 @@ function submitAnswer(selectedChoice, button) {
   const answerButtons = document.querySelectorAll('.answer-button');
   answerButtons.forEach(btn => btn.disabled = true);
 
-  fetch('../check_answer.php', {
+  fetch('/code_quest/php/check_answer.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ question_id: questionId, selected_choice: selectedChoice })
@@ -85,7 +85,7 @@ function loseLife() {
     updateLivesDisplay(); // Atualiza a exibição das vidas
 
     // Atualiza no banco de dados
-    fetch('../update_life.php', {
+    fetch('/code_quest/php/update_life.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ decrement: 1 }) // Envia o decremento
@@ -106,13 +106,20 @@ function loseLife() {
   }
 }
 
-// Função para atualizar a exibição das vidas na interface
 function updateLivesDisplay() {
+  console.log("Atualizando exibição das vidas. Total de vidas:", lives);
   for (let i = 1; i <= 5; i++) {
     const heart = document.getElementById(`life${i}`);
-    heart.classList.toggle('lost', i > lives); // Marca os corações além do número de vidas como 'perdidos'
+    if (heart) {
+      console.log(`Alterando estado do coração com ID life${i}`);
+      heart.classList.toggle('lost', i > lives); // Aplica classe 'lost' para corações além do número de vidas
+    } else {
+      console.error(`Elemento com ID life${i} não encontrado.`);
+    }
   }
 }
+
+
 
 // Função para desabilitar o quiz
 function disableQuiz() {

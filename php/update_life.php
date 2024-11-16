@@ -1,15 +1,15 @@
 <?php
+// Inicia a sessão
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Inicia a sessão
-session_start();
 
-$host = 'localhost';
-$db = 'db_codequest';
-$user = 'root';
-$password = '';
+$host = "localhost:3306";
+$usuario = "root";
+$senha = ""; 
+$database = "db_codequest";
 
 $conexao = new mysqli($host, $usuario, $senha, $database);
 
