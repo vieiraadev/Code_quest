@@ -12,7 +12,6 @@ if ($conexao->connect_error) {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Consulta o arquivo no banco
     $stmt = $conexao->prepare("SELECT nome_arquivo, dados FROM arquivos WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -20,7 +19,6 @@ if (isset($_GET['id'])) {
     $file = $result->fetch_assoc();
 
     if ($file) {
-        // Define os headers para download
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"" . $file['nome_arquivo'] . "\"");
 

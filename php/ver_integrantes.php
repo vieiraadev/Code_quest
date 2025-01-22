@@ -4,13 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Configuração do banco de dados
 $host = "localhost";
 $usuario = "root";
 $senha = "";
 $database = "db_codequest";
-
-// Criar a conexão com o banco de dados
 $conn = new mysqli($host, $usuario, $senha, $database);
 
 if ($conn->connect_error) {
@@ -19,7 +16,6 @@ if ($conn->connect_error) {
     exit;
 }
 
-// Verifica se o grupo_id foi enviado
 if (!isset($_GET['grupo_id']) || empty($_GET['grupo_id'])) {
     http_response_code(400);
     echo json_encode(["error" => "ID do grupo não fornecido."]);
@@ -27,8 +23,6 @@ if (!isset($_GET['grupo_id']) || empty($_GET['grupo_id'])) {
 }
 
 $grupo_id = (int)$_GET['grupo_id'];
-
-// Consulta os integrantes do grupo
 $sql = "SELECT a.id_aluno, a.nome 
         FROM grupo_alunos ga
         JOIN alunos a ON ga.aluno_id = a.id_aluno

@@ -1,7 +1,5 @@
 <?php
 header('Content-Type: application/json');
-
-// Configuração do banco de dados
 $host = 'localhost';
 $db = 'db_codequest';
 $user = 'root';

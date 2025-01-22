@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('http://localhost/code_quest/php/salvar_mensagem.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ grupo_id: grupoAtualId, aluno_id: 1, mensagem }) // Substituir aluno_id por valor dinâmico
+                body: JSON.stringify({ grupo_id: grupoAtualId, aluno_id: 1, mensagem })
             });
 
             if (!response.ok) throw new Error('Erro ao enviar mensagem.');

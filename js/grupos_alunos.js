@@ -34,16 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Erro ao carregar os grupos. Verifique sua conexão ou tente novamente.');
         }
     };
-
-    /**
-     * Adiciona eventos para os botões "Entrar no Grupo" e "Chat".
-     */
     const adicionarEventosAosBotoes = () => {
-        // Botões de entrar no grupo
         document.querySelectorAll('.btn-entrar').forEach(button => {
             button.addEventListener('click', async () => {
                 const grupoId = button.dataset.id;
-                const alunoId = 1; // Substitua por um ID real ou dinâmico
+                const alunoId = 1;
 
                 if (!confirm(`Deseja entrar no grupo ID ${grupoId}?`)) return;
 
@@ -57,6 +52,45 @@ document.addEventListener('DOMContentLoaded', () => {
                     const result = await response.json();
                     if (response.ok && result.success) {
                         alert(result.success || 'Você entrou no grupo com sucesso!');
+
+
+                        button.style.display = 'none';
+
+
+                        const sairBtn = document.createElement('button');
+                        sairBtn.classList.add('btn-sair');
+                        sairBtn.dataset.id = grupoId;
+                        sairBtn.textContent = 'Sair do Grupo';
+
+
+                        sairBtn.addEventListener('click', async () => {
+                            if (!confirm(`Deseja sair do grupo ID ${grupoId}?`)) return;
+
+                            try {
+                                const response = await fetch('http://localhost/code_quest/php/sair_grupo.php', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ grupo_id: grupoId, aluno_id: alunoId })
+                                });
+
+                                const result = await response.json();
+                                if (response.ok && result.success) {
+                                    alert(result.success || 'Você saiu do grupo com sucesso!');
+
+
+                                    button.style.display = 'inline-block';
+                                    sairBtn.remove();
+                                } else {
+                                    throw new Error(result.error || 'Erro ao sair do grupo.');
+                                }
+                            } catch (error) {
+                                console.error('Erro ao sair do grupo:', error);
+                                alert(error.message || 'Erro ao sair do grupo. Tente novamente.');
+                            }
+                        });
+
+
+                        button.parentElement.appendChild(sairBtn);
                     } else {
                         throw new Error(result.error || 'Erro ao entrar no grupo.');
                     }
@@ -67,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Botões de chat
+
         document.querySelectorAll('.btn-chat').forEach(button => {
             button.addEventListener('click', async () => {
                 const grupoId = button.dataset.id;
@@ -78,9 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    /**
-     * Abre o chat do grupo.
-     */
     const abrirChat = async (grupoId, grupoNome) => {
         const chatModal = document.getElementById('chat-modal');
         const mensagensDiv = document.getElementById('mensagens');

@@ -1,11 +1,11 @@
 async function fetchFiles() {
     try {
-        const response = await fetch('pdfadmin.php'); 
+        const response = await fetch('pdfadmin.php');
         if (!response.ok) {
             throw new Error("Erro na resposta da requisição");
         }
         const files = await response.json();
-        
+
         const fileList = document.getElementById('fileList');
         fileList.innerHTML = '';
 
@@ -13,17 +13,12 @@ async function fetchFiles() {
             const listItem = document.createElement('li');
             listItem.classList.add("file-item");
 
-            // Container para a pré-visualização
             const previewContainer = document.createElement('div');
             previewContainer.classList.add("preview");
-
-            // Canvas para prévia do PDF
             const canvas = document.createElement('canvas');
             canvas.classList.add("preview-canvas");
             canvas.width = 100;
             const context = canvas.getContext('2d');
-
-            // Renderiza o PDF como uma miniatura
             const loadingTask = pdfjsLib.getDocument(file.url);
             loadingTask.promise.then(pdf => {
                 pdf.getPage(1).then(page => {
@@ -40,22 +35,19 @@ async function fetchFiles() {
 
             previewContainer.appendChild(canvas);
             listItem.appendChild(previewContainer);
-            
-            //assunto do pdf
+
             const assunto = document.createElement('p');
             assunto.classList.add("assunto-text");
             assunto.textContent = `assunto: ${file.assunto}`;
             listItem.appendChild(assunto)
 
 
-            // Link para download
             const link = document.createElement('a');
             link.href = file.url;
             link.textContent = file.nome_arquivo;
             link.classList.add("download-link");
             listItem.appendChild(link);
 
-            // Primeiro radio com label, no mesmo contêiner div
             const radioContainer1 = document.createElement('div');
             radioContainer1.classList.add("radio-container");
             const radioInput1 = document.createElement('input');
@@ -70,7 +62,6 @@ async function fetchFiles() {
             radioContainer1.appendChild(label1);
             listItem.appendChild(radioContainer1);
 
-            // Segundo radio com label, no mesmo contêiner div
             const radioContainer2 = document.createElement('div');
             radioContainer2.classList.add("radio-container");
             const radioInput2 = document.createElement('input');
@@ -85,28 +76,26 @@ async function fetchFiles() {
             radioContainer2.appendChild(label2);
             listItem.appendChild(radioContainer2);
 
-            // Botão de submit
             const submitButton = document.createElement('button');
-            submitButton.type = 'button'; // Define como 'button' para evitar recarregar a página
+            submitButton.type = 'button';
             submitButton.textContent = 'Enviar';
             submitButton.addEventListener('click', async () => {
                 const selectedOption = document.querySelector(`input[name="situacao_${file.id}"]:checked`);
-                
+
                 if (!selectedOption) {
                     alert("Selecione uma opção antes de enviar.");
                     return;
                 }
-                
+
                 const situacao = selectedOption.value;
-                
-                // Envia a requisição para atualizar o banco de dados
+
                 try {
                     const updateResponse = await fetch('mudarsituacao.php', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ id: file.id, situacao: situacao })
                     });
-                    
+
                     const result = await updateResponse.json();
                     if (result.success) {
                         alert("Situação atualizada com sucesso!");

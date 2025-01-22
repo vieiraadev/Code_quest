@@ -1,23 +1,23 @@
-let lastQuestionId = 0; // Variável para controlar o ID da última pergunta respondida
-let lives = 5; // Vidas do aluno, inicializado com o valor máximo
+let lastQuestionId = 0;
+let lives = 5;
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchLives(); // Carrega o número de vidas do banco de dados ao iniciar
-  loadQuestion(); // Carrega a primeira pergunta
+  fetchLives();
+  loadQuestion();
 });
 
-// Função para carregar o número de vidas do banco de dados
+
 function fetchLives() {
   fetch('/code_quest/php/fetch_lives.php')
     .then(response => response.json())
     .then(data => {
-      lives = data.lives; // Atualiza a quantidade de vidas com o valor do banco de dados
-      updateLivesDisplay(); // Exibe as vidas na interface
+      lives = data.lives;
+      updateLivesDisplay();
     })
     .catch(error => console.error("Erro ao buscar o número de vidas:", error));
 }
 
-// Função para carregar a próxima pergunta
+
 function loadQuestion() {
   fetch(`/code_quest/php/load_question.php?last_question_id=${lastQuestionId}`)
     .then(response => response.json())
@@ -31,14 +31,12 @@ function loadQuestion() {
     .catch(error => console.error("Erro ao carregar a pergunta:", error));
 }
 
-// Função para exibir a pergunta e as alternativas na página
 function displayQuestion(data) {
   document.getElementById('question-number').innerText = data.question.question_id;
   document.getElementById('question-text').innerText = data.question.question_text;
-  lastQuestionId = data.question.question_id; // Atualiza o ID da última pergunta
-
+  lastQuestionId = data.question.question_id;
   const answersBox = document.getElementById('answers-box');
-  answersBox.innerHTML = ''; // Limpa alternativas anteriores
+  answersBox.innerHTML = '';
 
   data.choices.forEach(choice => {
     const button = document.createElement('button');
@@ -49,11 +47,9 @@ function displayQuestion(data) {
   });
 }
 
-// Função para enviar a resposta selecionada ao servidor
 function submitAnswer(selectedChoice, button) {
   const questionId = document.getElementById('question-number').innerText;
 
-  // Desabilita todos os botões de resposta para evitar múltiplos cliques
   const answerButtons = document.querySelectorAll('.answer-button');
   answerButtons.forEach(btn => btn.disabled = true);
 
@@ -64,31 +60,27 @@ function submitAnswer(selectedChoice, button) {
   })
     .then(response => response.json())
     .then(data => {
-      // Se a resposta estiver correta, marca o botão como verde; caso contrário, como vermelho
       if (data.correct) {
-        button.classList.add('correct'); // Adiciona classe para resposta correta (verde)
+        button.classList.add('correct');
       } else {
-        button.classList.add('incorrect'); // Adiciona classe para resposta incorreta (vermelho)
-        loseLife(); // Chama a função para perder uma vida
+        button.classList.add('incorrect');
+        loseLife();
       }
 
-      // Espera 1.5 segundos e carrega a próxima pergunta
       setTimeout(loadQuestion, 1500);
     })
     .catch(error => console.error("Erro ao verificar a resposta:", error));
 }
 
-// Função para perder uma vida
 function loseLife() {
   if (lives > 0) {
-    lives -= 1; // Decrementa o número de vidas
-    updateLivesDisplay(); // Atualiza a exibição das vidas
+    lives -= 1;
+    updateLivesDisplay();
 
-    // Atualiza no banco de dados
     fetch('/code_quest/php/update_life.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ decrement: 1 }) // Envia o decremento
+      body: JSON.stringify({ decrement: 1 })
     })
       .then(response => response.json())
       .then(data => {
@@ -98,10 +90,10 @@ function loseLife() {
       })
       .catch(error => console.error("Erro ao atualizar vida:", error));
 
-    // Verifica se o usuário perdeu todas as vidas
+
     if (lives === 0) {
       alert("Você perdeu todas as vidas! Tente novamente.");
-      disableQuiz(); // Desabilita o quiz se não houver mais vidas
+      disableQuiz();
     }
   }
 }
@@ -112,7 +104,7 @@ function updateLivesDisplay() {
     const heart = document.getElementById(`life${i}`);
     if (heart) {
       console.log(`Alterando estado do coração com ID life${i}`);
-      heart.classList.toggle('lost', i > lives); // Aplica classe 'lost' para corações além do número de vidas
+      heart.classList.toggle('lost', i > lives);
     } else {
       console.error(`Elemento com ID life${i} não encontrado.`);
     }
@@ -121,7 +113,6 @@ function updateLivesDisplay() {
 
 
 
-// Função para desabilitar o quiz
 function disableQuiz() {
   const answerButtons = document.querySelectorAll('.answer-button');
   answerButtons.forEach(btn => btn.disabled = true);

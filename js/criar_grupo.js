@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const fecharModalIntegrantes = document.getElementById('fechar-modal-integrantes');
 
 
-    /**
-     * Função para carregar os grupos dinamicamente e atualizar o DOM.
-     */
     const carregarGrupos = async () => {
         try {
             console.log('Carregando grupos...');
@@ -41,23 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     const exibirIntegrantes = (grupoNome, integrantes) => {
-        // Atualiza o título do modal
         document.getElementById('nome-grupo-modal').innerText = `Integrantes de ${grupoNome}`;
-
-        // Atualiza a lista de integrantes
         listaIntegrantes.innerHTML = integrantes.length > 0
             ? integrantes.map(i => `<p>${i.nome}</p>`).join('')
             : '<p>Este grupo ainda não possui integrantes.</p>';
 
-        // Exibe o modal
         modalIntegrantes.style.display = 'flex';
     };
 
-    /**
-     * Adiciona eventos para os botões "Excluir", "Ver Integrantes" e "Chat".
-     */
     const adicionarEventosAosBotoes = () => {
-        // Botões de excluir grupo
         document.querySelectorAll('.btn-excluir').forEach(button => {
             button.addEventListener('click', async () => {
                 const grupoId = button.dataset.id;
@@ -131,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Botões de chat
         document.querySelectorAll('.btn-chat').forEach(button => {
             button.addEventListener('click', async () => {
                 const grupoId = button.dataset.id;
@@ -142,9 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    /**
-     * Abre o chat do grupo.
-     */
     const abrirChat = async (grupoId, grupoNome) => {
         const chatModal = document.getElementById('chat-modal');
         const mensagensDiv = document.getElementById('mensagens');
@@ -176,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('http://localhost/code_quest/php/salvar_mensagem.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ grupo_id: grupoId, aluno_id: 1, mensagem }) // Substitua aluno_id por valor dinâmico
+                    body: JSON.stringify({ grupo_id: grupoId, aluno_id: 1, mensagem })
                 });
 
                 if (!response.ok) throw new Error('Erro ao enviar mensagem.');
@@ -199,9 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modalIntegrantes.style.display = 'none';
     };
 
-    /**
-     * Submissão do formulário para criar um novo grupo.
-     */
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -217,13 +199,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             alert(result.success || 'Grupo criado com sucesso!');
             form.reset();
-            carregarGrupos(); // Atualiza a lista de grupos
+            carregarGrupos();
         } catch (error) {
             console.error('Erro ao criar o grupo:', error);
             alert('Erro ao criar o grupo. Tente novamente.');
         }
     });
-
-    // Carrega os grupos ao carregar a página
     carregarGrupos();
 });

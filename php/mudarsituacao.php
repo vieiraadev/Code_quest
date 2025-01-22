@@ -11,8 +11,6 @@ if ($conexao->connect_error) {
 $data = json_decode(file_get_contents("php://input"), true);
 $fileId = $data['id'];
 $situacao = $data['situacao'];
-
-// Atualizar a coluna situacao com a opção selecionada
 $stmt = $conexao->prepare("UPDATE arquivos SET situacao = ? WHERE id = ?");
 $stmt->bind_param("si", $situacao, $fileId);
 

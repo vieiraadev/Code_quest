@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionInput = document.getElementById('user-question');
     const statusMessage = document.getElementById('status-message');
 
-    // Função para adicionar perguntas e respostas ao HTML
     function adicionarPerguntaAoHTML(pergunta, respostas = []) {
         const faqItem = document.createElement('div');
         faqItem.classList.add('faq-item');
@@ -19,9 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ${respostasHTML}
         `;
 
-        faqContainer.prepend(faqItem); // Adiciona a nova pergunta no início do contêiner
+        faqContainer.prepend(faqItem);
 
-        // Adiciona evento de clique para expandir/ocultar respostas
         const questionButton = faqItem.querySelector('.faq-question');
         questionButton.addEventListener('click', () => {
             const answers = faqItem.querySelectorAll('.faq-answer');
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função para ativar interatividade em perguntas estáticas
     function ativarPerguntasEstaticas() {
         const staticQuestions = faqContainer.querySelectorAll('.faq-item .faq-question');
         staticQuestions.forEach(button => {
@@ -44,9 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função para carregar perguntas e respostas do servidor
     function carregarFAQ() {
-        fetch('http://localhost/code_quest/php/carregar_faq.php') // Certifique-se de que o caminho está correto
+        fetch('http://localhost/code_quest/php/carregar_faq.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao carregar perguntas.');
@@ -55,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 if (data.success) {
-                    faqContainer.innerHTML = ''; // Limpa o container antes de adicionar novas perguntas
+                    faqContainer.innerHTML = '';
                     data.data.forEach(item => {
                         adicionarPerguntaAoHTML(item.pergunta, item.respostas || []);
                     });
@@ -68,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Função para enviar uma nova pergunta
     function enviarPergunta() {
         const questionText = questionInput.value.trim();
 
@@ -78,21 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        fetch('http://localhost/code_quest/php/salvar_pergunta.php', { // Caminho do PHP para salvar perguntas
+        fetch('http://localhost/code_quest/php/salvar_pergunta.php', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ pergunta: questionText }) // Envia o texto da pergunta
+            body: JSON.stringify({ pergunta: questionText })
         })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     statusMessage.textContent = "Sua pergunta foi enviada com sucesso!";
                     statusMessage.style.color = "green";
-                    questionInput.value = ''; // Limpa o campo de entrada
+                    questionInput.value = ''; 
 
-                    // Adiciona a nova pergunta diretamente no FAQ
                     adicionarPerguntaAoHTML(questionText);
                 } else {
                     statusMessage.textContent = data.message || "Erro ao enviar a pergunta.";
@@ -106,12 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Adiciona evento ao botão "Enviar"
     submitButton.addEventListener('click', enviarPergunta);
 
-    // Ativa as perguntas estáticas existentes no HTML
     ativarPerguntasEstaticas();
 
-    // Carrega as perguntas dinâmicas quando a página é carregada
     carregarFAQ();
 });

@@ -9,7 +9,6 @@ if ($conexao->connect_error) {
     die("Falha na conexão: " . $conexao->connect_error);
 }
 
-// Consulta para listar os arquivos
 $query = "SELECT id, nome_arquivo, situacao, assunto FROM arquivos";
 $result = $conexao->query($query);
 

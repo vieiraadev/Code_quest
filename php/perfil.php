@@ -1,14 +1,13 @@
 <?php
 session_start();
-require 'conexao.php'; // Arquivo que conecta ao banco de dados
+require 'conexao.php'; 
 
-// Verifique se o usuário está logado
+
 if (!isset($_SESSION['tipo_usuario']) || !isset($_SESSION['usuario_id'])) {
-    header("Location: login.html"); // Redireciona para a página de login se não estiver logado
+    header("Location: login.html"); 
     exit();
 }
 
-// Determina a tabela com base no tipo de usuário
 $tipo_usuario = $_SESSION['tipo_usuario'];
 $usuario_id = $_SESSION['usuario_id'];
 
@@ -29,6 +28,5 @@ if (!$usuario) {
     exit();
 }
 
-// Inclui o arquivo HTML para exibir o perfil
 include 'perfil.html';
 ?>

@@ -12,24 +12,18 @@ try {
     $conn = new PDO("mysql:host=$host;dbname=$database", $usuario, $senha);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Verifica se o formulário foi enviado e o arquivo foi selecionado
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['uploadpdfs'])) {
         $arquivo = $_FILES['uploadpdfs'];
 
-        // Verifica se o arquivo é um PDF
         if ($arquivo['type'] != 'application/pdf') {
             echo "Por favor, envie apenas arquivos PDF.";
             exit;
         }
-
-        // Lê o conteúdo do arquivo e prepara as informações para o banco de dados
         $nomeArquivo = $arquivo['name'];
         $tipoArquivo = $arquivo['type'];
         $tamanhoArquivo = $arquivo['size'];
         $dadosArquivo = file_get_contents($arquivo['tmp_name']);
         $assunto = $_POST['assunto'];
-
-        // Inserção no banco de dados
         $sql = "INSERT INTO arquivos (nome_arquivo, tipo_arquivo, tamanho_arquivo, situacao, dados, assunto) VALUES (:nome, :tipo, :tamanho,:situacao, :dados,:assunto)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':nome', $nomeArquivo);

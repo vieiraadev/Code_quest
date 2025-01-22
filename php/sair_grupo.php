@@ -4,13 +4,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Configuração do banco de dados
 $host = "localhost";
 $usuario = "root";
 $senha = "";
 $database = "db_codequest";
 
-// Criar a conexão com o banco de dados
 $conn = new mysqli($host, $usuario, $senha, $database);
 
 if ($conn->connect_error) {
@@ -19,7 +17,6 @@ if ($conn->connect_error) {
     exit;
 }
 
-// Receber os dados enviados
 $input = json_decode(file_get_contents('php://input'), true);
 
 if (!$input || !isset($input['grupo_id']) || !isset($input['aluno_id'])) {
@@ -37,7 +34,6 @@ if ($grupo_id <= 0 || $aluno_id <= 0) {
     exit;
 }
 
-// Remover o aluno do grupo
 $sql = "DELETE FROM grupo_alunos WHERE grupo_id = ? AND aluno_id = ?";
 $stmt = $conn->prepare($sql);
 

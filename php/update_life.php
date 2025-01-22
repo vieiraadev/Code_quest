@@ -18,20 +18,16 @@ if ($conexao->connect_error) {
     die(json_encode(["success" => false, "message" => "Erro de conexão ao banco de dados"]));
 }
 
-// Verificar se o ID do aluno está na sessão
 if (!isset($_SESSION['id_aluno'])) {
     echo json_encode(["success" => false, "message" => "Usuário não está logado"]);
     exit;
 }
 
-$aluno_id = $_SESSION['id_aluno']; // Usar o ID do aluno logado
-
-// Chamar a procedure para decrementar vida
+$aluno_id = $_SESSION['id_aluno']; 
 $stmt = $conexao->prepare("CALL decrementar_vida(?)");
 $stmt->bind_param("i", $aluno_id);
 
 if ($stmt->execute()) {
-    // Buscar o número atualizado de vidas para retornar ao frontend
     $result = $conexao->query("SELECT vida FROM aluno WHERE id_aluno = $aluno_id");
     if ($result && $row = $result->fetch_assoc()) {
         echo json_encode(["success" => true, "new_lives" => $row['vida']]);

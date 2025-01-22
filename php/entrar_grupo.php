@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Configuração do banco de dados
 $host = "localhost";
 $usuario = "root";
 $senha = "";
@@ -18,7 +17,6 @@ if ($conn->connect_error) {
     exit;
 }
 
-// Receber os dados enviados pelo frontend
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (!isset($data['grupo_id']) || !isset($data['aluno_id'])) {
@@ -30,7 +28,6 @@ if (!isset($data['grupo_id']) || !isset($data['aluno_id'])) {
 $grupo_id = (int)$data['grupo_id'];
 $aluno_id = (int)$data['aluno_id'];
 
-// Verificar se o aluno já está no grupo
 $sql = "SELECT * FROM grupo_alunos WHERE grupo_id = ? AND aluno_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $grupo_id, $aluno_id);
@@ -43,7 +40,6 @@ if ($result->num_rows > 0) {
     exit;
 }
 
-// Adicionar o aluno ao grupo
 $sql = "INSERT INTO grupo_alunos (grupo_id, aluno_id) VALUES (?, ?)";
 $stmt = $conn->prepare($sql);
 

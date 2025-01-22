@@ -379,7 +379,7 @@ form {
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 875px;
+    width: 975px;
     margin: 20px auto;
     margin-left: 265px;
 }
@@ -417,7 +417,9 @@ form button:hover {
 .grupos-container h2 {
     margin-bottom: 10px;
     color: #fff;
-    font-size: 30px;
+    font-size: 20px;
+    margin-left: 265px;
+    margin-top: 30px;
 }
 
 .grupo {
@@ -450,6 +452,14 @@ form button:hover {
 .grupo button:hover {
     background-color: #B1880B;
 }
+
+.subtitle {
+    font-size: 40px;
+    color: #fff;
+    margin-left: 265px;
+    font-family: 'Poppins', sans-serif;
+}
+
 
 /* Estilo do Modal de Chat */
 #chat-modal {

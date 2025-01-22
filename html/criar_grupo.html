@@ -12,32 +12,23 @@
     <div id="nav-bar">
         <div id="nav-header"><a id="nav-title" href="#">CODE<span>QUEST</span></a></div>
         <div id="nav-content">
-            <a href="modulos.html" class="nav-button">
-                <i class="fas fa-cubes"></i>
-                <span>Módulos</span>
-            </a>
             <a href="pdfs.html" class="nav-button">
                 <i class="fas fa-file-pdf"></i>
                 <span>PDFS</span>
             </a>
-            <a href="home.html" class="nav-button">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
             <a href="ajuda.html" class="nav-button">
                 <i class="fas fa-question-circle"></i>
-                <span>Ajuda</span>
+                <span>Grupos</span>
             </a>
             <a href="perfil.html" class="nav-button">
                 <i class="fas fa-user"></i>
                 <span>Perfil</span>
             </a>
+
             <div id="nav-content-highlight"></div>
         </div>
     </div>
     <h1>Criar Novo Grupo</h1>
-
-    <!-- Formulário para criar grupo -->
     <form id="form-criar-grupo">
         <label for="nome_grupo">Nome do Grupo:</label><br>
         <input type="text" id="nome_grupo" name="nome_grupo" required><br><br>
@@ -50,11 +41,9 @@
 
         <button type="submit">Criar Grupo</button>
     </form>
-
-    <!-- Área "Meus Grupos" -->
+    <br>
+    <div class="subtitle">Meus Grupos</div>
     <div class="grupos-container" id="meus-grupos">
-        <h2>Meus Grupos</h2>
-        <!-- Grupos serão carregados dinamicamente -->
     </div>
 
     <div id="chat-modal" style="display: none;">
@@ -66,14 +55,12 @@
             <button id="fechar-chat">Fechar</button>
         </div>
     </div>
-    <!-- Modal para Exibir Integrantes -->
     <div id="modal-integrantes">
         <div class="modal-content">
             <div class="modal-header">
                 <span id="nome-grupo-modal">Integrantes do Grupo</span>
             </div>
             <div class="modal-body" id="lista-integrantes">
-                <!-- Integrantes serão listados dinamicamente aqui -->
             </div>
             <div class="modal-footer">
                 <button id="fechar-modal-integrantes">Fechar</button>

@@ -9,7 +9,6 @@ $usuario = "root";
 $senha = "";
 $database = "db_codequest";
 
-// Conexão com o banco de dados
 $conn = new mysqli($host, $usuario, $senha, $database);
 
 if ($conn->connect_error) {
