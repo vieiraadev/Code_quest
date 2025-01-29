@@ -1,25 +1,48 @@
-CodeQuest é um projeto integrador desenvolvido por estudantes de Engenharia de Software como parte das disciplinas de Programação Web, Banco de Dados, Interação Humana com o Computador (IHC) e Engenharia de Requisitos. , o CodeQuest visa ensinar conceitos de programação de forma lúdica e interativa.<br>
+# 📚 Sistema de Aprendizado sobre Programação
 
-Este projeto integra:
+Este é um sistema web desenvolvido com **HTML, CSS, JavaScript, PHP e MySQL**, focado no aprendizado de programação. A plataforma conta com diferentes perfis de usuários, cada um com funções específicas.
 
-Programação Web: Desenvolvimento da interface e funcionalidades utilizando tecnologias de front-end e back-end.<br>
-Banco de Dados: Armazenamento de dados do usuário.<br>
-Interação Humana com o Computador: Design intuitivo e acessível com foco em experiência do usuário.<br>
-Engenharia de Requisitos: Definição de requisitos funcionais e não funcionais, análise de personas e protótipos de baixa e alta fidelidade.<br>
+---
 
-Tecnologias Utilizadas
+## 📋 Perfis de Usuários
 
-Front-end:<br>
-HTML5<br>
-CSS3<br>
-JavaScript<br>
-Back-end:<br>
-PHP<br>
-Banco de Dados:<br>
-MySQL<br>
-Outros:<br>
-Figma para prototipação<br>
-Git para controle de versão<br>
+1. **Aluno**:
+   - Realiza quizzes para testar conhecimentos.
+   - Pode ingressar em grupos de aprendizado.
+   - Possui um sistema de vidas, que influencia a participação nos quizzes.
 
-O projeto ainda está em andamento.<br>
-Este projeto está sendo feito com cinco integrantes.
+2. **Professor**:
+   - Cria e gerencia perguntas para quizzes.
+   - Cria e gerencia grupos de aprendizado.
+   - Adiciona ou remove alunos dos grupos.
+   - Monta quizzes com base nas perguntas criadas.
+
+3. **Curador**:
+   - Avalia perguntas criadas pelos professores.
+   - Aprova ou rejeita quizzes criados.
+
+---
+
+## 🚀 Funcionalidades
+
+- **Sistema de login diferenciado** para cada perfil de usuário.
+- **Criação e gerenciamento de quizzes**.
+- **Participação e administração de grupos de aprendizado**.
+- **Avaliação de conteúdo** por curadores.
+- **Sistema de vidas** para alunos.
+
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: PHP
+- **Banco de Dados**: MySQL
+
+---
+
+## 🛠️ Como Instalar
+
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/seu-re
