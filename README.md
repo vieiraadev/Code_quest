@@ -1,6 +1,6 @@
 # 📚 Sistema de Aprendizado sobre Programação
 
-Este é um sistema web desenvolvido com **HTML, CSS, JavaScript, PHP e MySQL**, focado no aprendizado de programação. A plataforma conta com diferentes perfis de usuários, cada um com funções específicas.
+Este é um sistema web, chamado **CodeQuest desenvolvido com **HTML, CSS, JavaScript, PHP e MySQL**, focado no aprendizado de programação. A plataforma conta com diferentes perfis de usuários, cada um com funções específicas.
 
 ---
 
@@ -40,9 +40,3 @@ Este é um sistema web desenvolvido com **HTML, CSS, JavaScript, PHP e MySQL**, 
 - **Banco de Dados**: MySQL
 
 ---
-
-## 🛠️ Como Instalar
-
-1. Clone o repositório:
-   ```sh
-   git clone https://github.com/seu-usuario/seu-re
